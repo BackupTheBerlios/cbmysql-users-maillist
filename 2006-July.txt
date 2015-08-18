@@ -1,0 +1,22 @@
+From cbecker at nachtwach.de  Fri Jul  7 13:05:28 2006
+From: cbecker at nachtwach.de (Christoph Becker)
+Date: Fri, 07 Jul 2006 13:05:28 +0200
+Subject: [Cbmysql-users] MySQL-Klasse 4.0.4 released
+Message-ID: <44AE3FF8.50805@nachtwach.de>
+
+Hallo,
+
+unter
+http://svn.berlios.de/svnroot/repos/cbmysql/trunk/include/cbmysql.class.php
+
+kann man sie die neueste Version der MySQL-Klasse herunterladen. Es
+wurden einige Bug-Fixed eingespielt und die Zeitmessung f?r einzelne
+Queries optimiert.
+
+Die Ingress oHG setzt dieses Script ebenfalls bei Ihrer Software ein und
+ist ein gro?er Fan.
+
+Gr??e
+ Christoph
+
+

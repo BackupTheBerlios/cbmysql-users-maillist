@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cbmysql-users] Toolbox f&#252;r SQL in Arbeit
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cbmysql-users/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:cbmysql-users%40lists.berlios.de?Subject=Re%3A%20%5BCbmysql-users%5D%20%3D%3Fiso-8859-1%3Fq%3FToolbox_f%3DFCr_SQL_in_Arbeit%3F%3D&In-Reply-To=%3C44CF7CF3.2070806%40nachtwach.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cbmysql-users] Toolbox f&#252;r SQL in Arbeit</H1>
+    <B>Christoph Becker</B> 
+    <A HREF="mailto:cbmysql-users%40lists.berlios.de?Subject=Re%3A%20%5BCbmysql-users%5D%20%3D%3Fiso-8859-1%3Fq%3FToolbox_f%3DFCr_SQL_in_Arbeit%3F%3D&In-Reply-To=%3C44CF7CF3.2070806%40nachtwach.de%3E"
+       TITLE="[Cbmysql-users] Toolbox f&#252;r SQL in Arbeit">cbecker at nachtwach.de
+       </A><BR>
+    <I>Tue Aug  1 18:10:27 CEST 2006</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1">[ date ]</a>
+              <a href="thread.html#1">[ thread ]</a>
+              <a href="subject.html#1">[ subject ]</a>
+              <a href="author.html#1">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hallo Leute,
+
+immer wieder die gleichen Arbeiten bei SQL Befehlen. Daf&#252;r habe ich
+jetzt eine Toolbox erarbeitet (die noch lange nicht fertig ist).
+
+Formulardaten liegen ja oft in der Form
+$formata = array('name'=&gt;'wert', 'strasse'=&gt;'wert' ...) vor. Damit diese
+dann fix weiterverarbeitet werden k&#246;nnen, nutzt man einfach die toolbox:
+
+
+public function import ($formdata) {
+  // diese Daten wollen wir aus dem Formulart haben
+  $needed = array(&quot;anrede&quot;, &quot;vorname&quot;,
+		&quot;nachname&quot;, &quot;firma&quot;, &quot;strasse&quot;,						&quot;HN&quot;, &quot;PLZ&quot;, &quot;ort&quot;, &quot;addtime&quot;,
+&quot;email&quot;);
+
+		
+  $rows = sqltools::build_insert_rows( $needed );
+  $values = sqltools::build_insert_values( $needed, $formdata );
+				
+  $sql = &quot;INSERT INTO personen &quot; .
+         $rows . &quot; VALUES &quot; . $values;
+
+   // ....
+}
+
+analog f&#252;r einen update-befehl:
+$sql_query = sqltools::build_update( $needed, $formdata );
+$complete_query = &quot;UPDATE blablabla &quot;.$sql_query.&quot; WHERE x=y&quot;;
+
+
+um das insert komplett (mit einem befehl abzuarbeiten):
+$sql_query = sqltools::build_insert( $needed, $formdata );
+$complete_query = &quot;INSERT INTO blablabla &quot;.$sql_query.&quot; WHERE x=y&quot;;
+
+Toolbox im Anhang
+
+Gr&#252;&#223;e
+ Christoph
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: sqltools.php
+Type: application/x-php
+Size: 2187 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/cbmysql-users/attachments/20060801/cda0395a/attachment.bin">https://lists.berlios.de/pipermail/cbmysql-users/attachments/20060801/cda0395a/attachment.bin</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1">[ date ]</a>
+              <a href="thread.html#1">[ thread ]</a>
+              <a href="subject.html#1">[ subject ]</a>
+              <a href="author.html#1">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cbmysql-users">More information about the Cbmysql-users
+mailing list</a><br>
+</body></html>

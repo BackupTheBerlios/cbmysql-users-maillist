@@ -1,0 +1,53 @@
+From cbecker at nachtwach.de  Tue Aug  1 18:10:27 2006
+From: cbecker at nachtwach.de (Christoph Becker)
+Date: Tue, 01 Aug 2006 18:10:27 +0200
+Subject: [Cbmysql-users] =?iso-8859-1?q?Toolbox_f=FCr_SQL_in_Arbeit?=
+Message-ID: <44CF7CF3.2070806@nachtwach.de>
+
+Hallo Leute,
+
+immer wieder die gleichen Arbeiten bei SQL Befehlen. Daf?r habe ich
+jetzt eine Toolbox erarbeitet (die noch lange nicht fertig ist).
+
+Formulardaten liegen ja oft in der Form
+$formata = array('name'=>'wert', 'strasse'=>'wert' ...) vor. Damit diese
+dann fix weiterverarbeitet werden k?nnen, nutzt man einfach die toolbox:
+
+
+public function import ($formdata) {
+  // diese Daten wollen wir aus dem Formulart haben
+  $needed = array("anrede", "vorname",
+		"nachname", "firma", "strasse",						"HN", "PLZ", "ort", "addtime",
+"email");
+
+		
+  $rows = sqltools::build_insert_rows( $needed );
+  $values = sqltools::build_insert_values( $needed, $formdata );
+				
+  $sql = "INSERT INTO personen " .
+         $rows . " VALUES " . $values;
+
+   // ....
+}
+
+analog f?r einen update-befehl:
+$sql_query = sqltools::build_update( $needed, $formdata );
+$complete_query = "UPDATE blablabla ".$sql_query." WHERE x=y";
+
+
+um das insert komplett (mit einem befehl abzuarbeiten):
+$sql_query = sqltools::build_insert( $needed, $formdata );
+$complete_query = "INSERT INTO blablabla ".$sql_query." WHERE x=y";
+
+Toolbox im Anhang
+
+Gr??e
+ Christoph
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: sqltools.php
+Type: application/x-php
+Size: 2187 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/cbmysql-users/attachments/20060801/cda0395a/attachment.bin>
+
